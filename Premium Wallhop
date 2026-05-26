@@ -1,42 +1,7 @@
 local securityEnabled = true -- true = whitelist ON, false = whitelist OFF
 
 local allowedUsers = {
-    [8081233261] = "permanent",
-    [3189967384] = "permanent",
-    [8789603217] = "permanent",
-    [2235731985] = "permanent",
-    [3673634114] = "permanent",
-    [10855923669] = "permanent",
-    [2446524776] = "permanent",
-    [7940606435] = "permanent",
-
-    [987654321] = os.time({
-        year = 2026,
-        month = 5,
-        day = 20,
-        hour = 0
-    }),
-
-    [4256101131] = os.time({
-        year = 2026,
-        month = 7,
-        day = 19,
-        hour = 10
-    }),
-
-     [723167901] = os.time({
-        year = 2026,
-        month = 6,
-        day = 24,
-        hour = 0
-    }),
-
-    [7190258814] = os.time({
-        year = 2026,
-        month = 6,
-        day = 19,
-        hour = 10
-    })
+    [7847187886] = "permanent",
 }
 
 local Players = game:GetService("Players")
