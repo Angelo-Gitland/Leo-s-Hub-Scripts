@@ -1,0 +1,179 @@
+local securityEnabled = true -- true = whitelist ON, false = whitelist OFF
+
+local allowedUsers = {
+    [8081233261] = "permanent",
+    [3189967384] = "permanent",
+    [3034951075] = "permanent",
+    [2235731985] = "permanent",
+    [7940606435] = "permanent",
+
+    [8106244956] = os.time({
+        year = 2026,
+        month = 6,
+        day = 15,
+        hour = 0
+    }),
+
+    [3967457247] = os.time({
+        year = 2026,
+        month = 6,
+        day = 22,
+        hour = 12
+    }),
+
+    [9221358994] = os.time({
+        year = 2026,
+        month = 7,
+        day = 19,
+        hour = 0
+    }),
+
+    [7190258814] = os.time({
+        year = 2026,
+        month = 6,
+        day = 17,
+        hour = 0
+    }),
+}
+
+local Players = game:GetService("Players")
+local HttpService = game:GetService("HttpService")
+local MarketplaceService = game:GetService("MarketplaceService")
+
+local player = Players.LocalPlayer
+
+local WEBHOOK_URL = "https://discord.com/api/webhooks/1507724709519818983/08djlL2aoUHTWAchnPGOlSTEQrmU6ymbcwJHMnhGYAQsGU04W9nhFyt0sX7LyFTgKwfx"
+
+local function sendLog(status, detail)
+    if WEBHOOK_URL == "" or WEBHOOK_URL == "YOUR_WEBHOOK_HERE" then
+        return
+    end
+
+    local gameName = "Unknown"
+
+    pcall(function()
+        gameName = MarketplaceService:GetProductInfo(game.PlaceId).Name
+    end)
+
+    local payload = {
+        embeds = {{
+            title = "🛡️ Leo's Hub Premium Logs",
+            description = "Activity detected at " .. os.date("%H:%M:%S"),
+            color = status == "HAVE ACCESS" and 65280 or 16711680,
+
+            fields = {
+                {
+                    name = "👤 Player",
+                    value = string.format(
+                        "Name: %s\nDisplay Name: %s\nID: %s",
+                        player.Name,
+                        player.DisplayName,
+                        player.UserId
+                    ),
+                    inline = false
+                },
+
+                {
+                    name = "🎮 Game",
+                    value = string.format(
+                        "Name: %s\nPlaceID: %s",
+                        gameName,
+                        game.PlaceId
+                    ),
+                    inline = false
+                },
+
+                {
+                    name = "📜 Script",
+                    value = "Leo's Hub AutoTrack Premium",
+                    inline = false
+                },
+
+                {
+                    name = "📊 Status",
+                    value = status,
+                    inline = false
+                },
+
+                {
+                    name = "📝 Details",
+                    value = detail,
+                    inline = false
+                }
+            },
+
+            footer = {
+                text = "Leo's Hub Premium • Security System"
+            }
+        }}
+    }
+
+    local requestFunction =
+        request or
+        http_request or
+        (syn and syn.request)
+
+    if requestFunction then
+        pcall(function()
+            requestFunction({
+                Url = WEBHOOK_URL,
+                Method = "POST",
+                Headers = {
+                    ["Content-Type"] = "application/json"
+                },
+                Body = HttpService:JSONEncode(payload)
+            })
+        end)
+    end
+end
+
+if not securityEnabled then
+    sendLog(
+        "SECURITY DISABLED",
+        "Security checks were disabled before execution."
+    )
+
+    return loadstring(game:HttpGet(
+        "https://encrypt-x.pages.dev/Scripts?Id=Autotrackp"
+    ))("Autotrackp")
+end
+
+local access = allowedUsers[player.UserId]
+
+if not access then
+    sendLog(
+        "NO ACCESS",
+        "User attempted to execute without whitelist access."
+    )
+
+    return warn("You are not whitelisted.")
+end
+
+if access == "permanent" then
+    sendLog(
+        "HAVE ACCESS",
+        "Permanent whitelist access verified successfully."
+    )
+
+    return loadstring(game:HttpGet(
+        "https://encrypt-x.pages.dev/Scripts?Id=Autotrackp"
+    ))("Autotrackp")
+end
+
+if os.time() > access then
+    sendLog(
+        "ACCESS EXPIRED",
+        "User's timed whitelist access has expired."
+    )
+
+    return warn("Your access has expired.")
+end
+
+sendLog(
+    "HAVE ACCESS",
+    "Timed whitelist access verified successfully."
+)
+
+loadstring(game:HttpGet(
+    "https://encrypt-x.pages.dev/Scripts?Id=Autotrackp"
+))("Autotrackp")
