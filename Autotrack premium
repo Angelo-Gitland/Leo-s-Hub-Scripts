@@ -1,7 +1,6 @@
 local securityEnabled = true -- true = whitelist ON, false = whitelist OFF
 
 local allowedUsers = {
-    [4321575771] = "permanent",
 }),
 
     [3967457247] = os.time({
