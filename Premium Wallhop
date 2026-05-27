@@ -3,6 +3,7 @@ local allowedUsers = {
     [7773544013] = "permanent",
     [4321575771] = "permanent",
     [7618701106] = "permanent",
+    [1572581255] = "permanent",
 }
 local Players = game:GetService("Players")
 local HttpService = game:GetService("HttpService")
