@@ -1,86 +1,57 @@
-local securityEnabled = true -- true = whitelist ON, false = whitelist OFF
-
+local securityEnabled = true
 local allowedUsers = {
     [7847187886] = "permanent",
-    [4321575771] = "permanent",
-
+}
 local Players = game:GetService("Players")
 local HttpService = game:GetService("HttpService")
 local MarketplaceService = game:GetService("MarketplaceService")
-
 local player = Players.LocalPlayer
-
 local WEBHOOK_URL = "https://discord.com/api/webhooks/1507756180787826808/83e_M5Quv-3guSaCxMQieccEn0iWM1cuEyrB6bvFo1jWXGQoCxivnPxLneQC887BNBlz"
 
 local function sendLog(status, detail)
-    if WEBHOOK_URL == "" or WEBHOOK_URL == "YOUR_WEBHOOK_HERE" then
-        return
-    end
-
+    if WEBHOOK_URL == "" or WEBHOOK_URL == "YOUR_WEBHOOK_HERE" then return end
     local gameName = "Unknown"
-
     pcall(function()
         gameName = MarketplaceService:GetProductInfo(game.PlaceId).Name
     end)
-
     local payload = {
         embeds = {{
             title = "🛡️ Leo's Hub Premium Logs",
             description = "Activity detected at " .. os.date("%H:%M:%S"),
             color = status == "HAVE ACCESS" and 65280 or 16711680,
-
             fields = {
                 {
                     name = "👤 Player",
-                    value = string.format(
-                        "Name: %s\nDisplay Name: %s\nID: %s",
-                        player.Name,
-                        player.DisplayName,
-                        player.UserId
-                    ),
+                    value = string.format("Name: %s\nDisplay Name: %s\nID: %s", player.Name, player.DisplayName, player.UserId),
                     inline = false
                 },
-
                 {
                     name = "🎮 Game",
-                    value = string.format(
-                        "Name: %s\nPlaceID: %s",
-                        gameName,
-                        game.PlaceId
-                    ),
+                    value = string.format("Name: %s\nPlaceID: %s", gameName, game.PlaceId),
                     inline = false
                 },
-
                 {
                     name = "📜 Script",
                     value = "Leo's Hub Premium",
                     inline = false
                 },
-
                 {
                     name = "📊 Status",
                     value = status,
                     inline = false
                 },
-
                 {
                     name = "📝 Details",
                     value = detail,
                     inline = false
                 }
             },
-
             footer = {
                 text = "Leo's Hub Premium • Security System"
             }
         }}
     }
-
-    local requestFunction =
-        request or
-        http_request or
-        (syn and syn.request)
-
+    local requestFunction = request or http_request or (syn and syn.request)
     if requestFunction then
         pcall(function()
             requestFunction({
@@ -96,46 +67,26 @@ local function sendLog(status, detail)
 end
 
 if not securityEnabled then
-    sendLog(
-        "SECURITY DISABLED",
-        "Security checks were disabled before execution."
-    )
-
+    sendLog("SECURITY DISABLED", "Security checks were disabled before execution.")
     return loadstring(game:HttpGet("https://encrypt-x.pages.dev/Scripts?Id=5604342624040"))("5604342624040")
 end
 
 local access = allowedUsers[player.UserId]
 
 if not access then
-    sendLog(
-        "NO ACCESS",
-        "User attempted to execute without whitelist access."
-    )
-
+    sendLog("NO ACCESS", "User attempted to execute without whitelist access.")
     return warn("You are not whitelisted.")
 end
 
 if access == "permanent" then
-    sendLog(
-        "HAVE ACCESS",
-        "Permanent whitelist access verified successfully."
-    )
-
+    sendLog("HAVE ACCESS", "Permanent whitelist access verified successfully.")
     return loadstring(game:HttpGet("https://encrypt-x.pages.dev/Scripts?Id=5604342624040"))("5604342624040")
 end
 
 if os.time() > access then
-    sendLog(
-        "ACCESS EXPIRED",
-        "User's timed whitelist access has expired."
-    )
-
+    sendLog("ACCESS EXPIRED", "User's timed whitelist access has expired.")
     return warn("Your access has expired.")
 end
 
-sendLog(
-    "HAVE ACCESS",
-    "Timed whitelist access verified successfully."
-)
-
+sendLog("HAVE ACCESS", "Timed whitelist access verified successfully.")
 loadstring(game:HttpGet("https://encrypt-x.pages.dev/Scripts?Id=5604342624040"))("5604342624040")
