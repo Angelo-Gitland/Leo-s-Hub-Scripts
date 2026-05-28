@@ -1,16 +1,11 @@
 local securityEnabled = true
 local allowedUsers = {
     [7773544013] = "permanent",
+    [10512592607] = "permanent",
     [4321575771] = "permanent",
     [7618701106] = "permanent",
     [1572581255] = "permanent",
     [723167901] = os.time({
-        year = 2026,
-        month = 6,
-        day = 27,
-        hour = 5
-    }),
-    [10512592607] = os.time({
         year = 2026,
         month = 6,
         day = 27,
