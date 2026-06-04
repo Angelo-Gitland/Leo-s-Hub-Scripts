@@ -1,6 +1,5 @@
 local securityEnabled = true
 local allowedUsers = {
-    [7773544013] = "permanent",
     [3673634114] = "permanent",
     [162931065] = "permanent",
     [443645612] = "permanent",
