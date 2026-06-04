@@ -9,12 +9,6 @@ local allowedUsers = {
     [2235731985] = "permanent",
     [3442440663] = "permanent",
     [1572581255] = "permanent",
-    [4256101131] = os.time({
-        year = 2026,
-        month = 7,
-        day = 3,
-        hour = 23
-    }),
     [723167901] = os.time({
         year = 2026,
         month = 6,
