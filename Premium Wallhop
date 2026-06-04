@@ -11,12 +11,6 @@ local allowedUsers = {
         day = 27,
         hour = 11
     }),
-    [3034951075] = os.time({
-        year = 2026,
-        month = 6,
-        day = 27,
-        hour = 5
-    }),
 }
 local Players = game:GetService("Players")
 local HttpService = game:GetService("HttpService")
