@@ -1,6 +1,6 @@
 local securityEnabled = true
 local allowedUsers = {
-    [3673634114] = "permanent",
+
 }
 local Players = game:GetService("Players")
 local HttpService = game:GetService("HttpService")
