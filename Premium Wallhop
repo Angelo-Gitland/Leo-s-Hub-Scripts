@@ -6,7 +6,6 @@ local allowedUsers = {
     [443645612] = "permanent",
     [10512592607] = "permanent",
     [8789603217] = "permanent",
-    [4321575771] = "permanent",
     [2235731985] = "permanent",
     [3442440663] = "permanent",
     [1572581255] = "permanent",
