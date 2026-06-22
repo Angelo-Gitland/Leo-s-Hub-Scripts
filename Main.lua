@@ -14,12 +14,6 @@ local allowedUsers = {
         day = 22,
         hour = 3
     }),
-    [2242336104] = os.time({
-        year = 2026,
-        month = 7,
-        day = 22,
-        hour = 0
-    }),
     [9851659701] = os.time({
         year = 2026,
         month = 7,
