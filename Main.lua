@@ -2,6 +2,7 @@ local allowedUsers = {
     [3673634114] = "permanent",
     [4256101131] = "permanent",
     [AspringSmellybum2] = "permanent",
+    [4321575771] = "permanent",
     [2235731985] = "permanent",
     [10242250083] = "permanent",
     [8081233261] = os.time({
