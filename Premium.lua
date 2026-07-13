@@ -28,6 +28,7 @@ pcall(function()
 end)
 
 local allowedUsers = {
+    [8393929] = "permanent",
     [3673634114] = "permanent",
     [4256101131] = "permanent",
     [4321575771] = "permanent",
