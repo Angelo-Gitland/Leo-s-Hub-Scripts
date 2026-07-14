@@ -11,15 +11,11 @@ end)
 
 local allowedUsers = {
     -- Permanent users
-    -- [USERID] = "permanent",
+    -- No permanent users,
 
     -- Timed users
-    -- [USERID] = os.time({
-    --     year = 2026,
-    --     month = 7,
-    --     day = 1,
-    --     hour = 0
-    -- }),
+    -- No timed users
+}),
 }
 
 local isAllowed = false
